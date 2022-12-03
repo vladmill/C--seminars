@@ -1,6 +1,5 @@
 ﻿Console.WriteLine("Сколько программистов в комнате?");
 int num = Convert.ToInt32(Console.ReadLine());
-
 string declination(int num) {  
 	string[] forms = {"программист", "программиста", "программистов"};
 	int rem100 = num % 100;
