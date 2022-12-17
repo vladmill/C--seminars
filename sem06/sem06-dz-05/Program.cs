@@ -31,6 +31,8 @@ void printArray(int[] array){
 int[] findMinMax(int[] array, int[]disI){
 	int[] result = new int[4];
 	int length = array.Length;
+
+	printArray(disI);
 	for (int i = 0; i < length; i++){
 		if(disI[i] == 0){
 			result[0] = i;
@@ -52,7 +54,6 @@ int[] findMinMax(int[] array, int[]disI){
 			}
 		}
 	}
-	Console.WriteLine($"{result[3]}");
 	return result;
 }
 void findMaxSubsequence(int[] array, int[]disI, int[] result){
@@ -62,10 +63,12 @@ void findMaxSubsequence(int[] array, int[]disI, int[] result){
 	int countNumS = 1;
 	bool flag = false;
 	int[] preRes = new int[2];
+
 	disI[minMax[0]] = 1;
 	preRes[0] = minMax[2];
-	Console.WriteLine($"{next} <= {minMax[3]}");
+	preRes[1] = minMax[2];
 	while (next <= minMax[3]){
+		flag = false;
 		for(int i = 0; i < length; i++){
 			if(array[i] == next){
 				disI[i] = 1;
@@ -75,30 +78,31 @@ void findMaxSubsequence(int[] array, int[]disI, int[] result){
 				break;
 			}
 		}
+		Console.WriteLine($"countNumS {countNumS} pre[0]{preRes[0]} pre[1]{preRes[1]} result{result[0]} {result[1]}");
 		if(flag){
 			next += 1;
 		}else{
-			if(countNumS > length/2){
-				result[0] = preRes[0];
-				result[1] = preRes[1];
-				break;
-			}
-			else if(countNumS > 1){
-				if(result[1] - result[0] < preRes[1] - preRes[0]){
-					Console.WriteLine($"{preRes[0]} - {preRes[1]}");
+			if(countNumS > 1){
+				if(countNumS > length/2){
+					result[0] = preRes[0];
+					result[1] = preRes[1];
+					break;
+				}
+				else if(result[1] - result[0] < preRes[1] - preRes[0]){
+					Console.WriteLine("да");
 					result[0] = preRes[0];
 					result[1] = preRes[1];
 				}
-			} 
+			}
+			findMaxSubsequence(array, disI, result);
 			break;
-			//findMaxSubsequence(array, disI, result);
 		}
 	}
 }
 
 int min = 1,
-	max = 9,
-	length = 7;
+	max = 14,
+	length = 9;
 int[] array = createUnicArray(min, max, length);
 printArray(array);
 int[] disIndex = new int[length];
