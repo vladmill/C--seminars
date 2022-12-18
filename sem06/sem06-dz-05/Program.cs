@@ -54,14 +54,14 @@ int[] findMinMax(int[] array, int[]disI){
 	}
 	return result;
 }
+
 void findMaxSubsequence(int[] array, int[]disI, int[] result){
 	int[] minMax = findMinMax(array, disI);
-	int length = array.Length;
-	int next = minMax[2] + 1;
-	int countNumS = 1;
-	bool flag = false;
 	int[] preRes = new int[2];
-
+	int length = array.Length,
+		next = minMax[2] + 1,
+		countNumS = 1;
+	bool flag = false;
 	disI[minMax[0]] = 1;
 	preRes[0] = minMax[2];
 	preRes[1] = minMax[2];
@@ -90,7 +90,9 @@ void findMaxSubsequence(int[] array, int[]disI, int[] result){
 					result[1] = preRes[1];
 				}
 			}
-			findMaxSubsequence(array, disI, result);
+			if(preRes[1] != minMax[3]){
+				findMaxSubsequence(array, disI, result);
+			}
 			break;
 		}
 	}
