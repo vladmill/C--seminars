@@ -31,8 +31,6 @@ void printArray(int[] array){
 int[] findMinMax(int[] array, int[]disI){
 	int[] result = new int[4];
 	int length = array.Length;
-
-	printArray(disI);
 	for (int i = 0; i < length; i++){
 		if(disI[i] == 0){
 			result[0] = i;
@@ -78,8 +76,7 @@ void findMaxSubsequence(int[] array, int[]disI, int[] result){
 				break;
 			}
 		}
-		Console.WriteLine($"countNumS {countNumS} pre[0]{preRes[0]} pre[1]{preRes[1]} result{result[0]} {result[1]}");
-		if(flag){
+		if(flag && preRes[1] != minMax[3]){
 			next += 1;
 		}else{
 			if(countNumS > 1){
@@ -89,7 +86,6 @@ void findMaxSubsequence(int[] array, int[]disI, int[] result){
 					break;
 				}
 				else if(result[1] - result[0] < preRes[1] - preRes[0]){
-					Console.WriteLine("да");
 					result[0] = preRes[0];
 					result[1] = preRes[1];
 				}
@@ -108,4 +104,5 @@ printArray(array);
 int[] disIndex = new int[length];
 int[] result = new int[2]{0, 0};
 findMaxSubsequence(array, disIndex, result);
+Console.Write("Первая максимальная последовательность: ");
 printArray(result);
