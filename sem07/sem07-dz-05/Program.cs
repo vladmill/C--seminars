@@ -8,8 +8,10 @@
 
 int[] findRandomIndex(int[,]disabledI){
 	int rows = Convert.ToInt32(disabledI.GetLongLength(0)),
-		cols = Convert.ToInt32(disabledI.GetLongLength(1)),
-		i = new Random().Next(0, rows/2),
+		cols = Convert.ToInt32(disabledI.GetLongLength(1));
+	if(rows % 2 == 0) rows = rows / 2;
+	else cols = cols / 2;
+	int	i = new Random().Next(0, rows),
 		j = new Random().Next(0, cols);
 		if(disabledI[i,j] == 1){
 			return findRandomIndex(disabledI);
@@ -23,10 +25,14 @@ int[] findRandomIndex(int[,]disabledI){
 int shuffling(int[,] matrix, int[,]disabledI){
 	int rows = Convert.ToInt32(matrix.GetLongLength(0)),
 		cols = Convert.ToInt32(matrix.GetLongLength(1)),
-		temp = 0,
+		rowsFor = rows,
+		colsFor = cols;
+	if(rows % 2 == 0) rowsFor = rows / 2;
+	else colsFor = cols / 2;
+	int	temp = 0,
 		count = 0;
-	for (int i = 0; i < rows/2; i++){
-		for (int j = 0; j < cols; j++){
+	for (int i = 0; i < rowsFor; i++){
+		for (int j = 0; j < colsFor; j++){
 			int lastI = rows - 1 - i,
 				lastJ = cols - 1 - j;
 			int[] rand = findRandomIndex(disabledI);
