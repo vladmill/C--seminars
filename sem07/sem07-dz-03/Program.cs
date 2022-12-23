@@ -10,6 +10,7 @@ void printMatrix(int[,] matrix){
 		Console.WriteLine();
 	}
 }
+
 void printArray(double[] array){
 	foreach(double element in array){
 		Console.Write($"{element}\t");
